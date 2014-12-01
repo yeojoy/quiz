@@ -1,119 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Quiz</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="/images/favicon/favicon.ico" type="image/x-icon" />
-  <script type="text/javascript" src="./javascripts/jquery-2.1.0.min.js"></script>
-</head>
-<body>
-  <h1>Hello, Yul!</h1>
-  <div>
-    <label style="display: block;">공백없이 0 ~ 9 사이의 숫자를 임의로 3개 이상 입력하세요. ',' 쉼표나 ' ' 공백은 허용하지 않습니다.</label>
-    <p></p>
-    <input id='num' type='text' size='30'  style="display: block;"/>
-    <p></p>
-    <button id="solve" style="display: block;">solve</button>
-    <p class="comment" style="display: block;"></p>
-  </div>
-  <script>
-
-  $().ready(function() {
-    $('#solve').click(function() {
-      array = [];
-      var number = $('#num').val();
-
-
-      console.log('number : ' + number);
-
-      if (number.length < 3) {
-        array = createNumbers();
-      } else {
-        for (var c in number) {
-          array.push(parseInt(number[c]));
-        }  
-      }
-      $('.comment').text('');
-      $('.comment').append('<p>input : ' + array + '</p>');
-
-      solveQuiz(array);
-
-    });
-    
-  });
-
-  function createNumbers() {
-    // 2개 이상 18개 이하의 0~9가 들어간 숫자 배열을 리턴한다.
-    array = [];
-    // 2 ~ 18의 랜덤수
-    maxIndex = Math.floor(Math.random() * 17) + 2;
-    for (i = 0; i < maxIndex; i++) {
-        array.push(Math.floor(Math.random() * 10));
-    }
-    console.log("ARRAY : " + array);
-    return array;
-  }
-
-  function solveQuiz(array) {
-    if (!array || array.length === 0) return;
-
-    console.log('source array : ' + array);
-    array = array.sort();
-    console.log('sorted array : ' + array);
-
-    length = array.length
-    // 첫번째만 0일 때,
-    if (array[0] === 0) {
-        for (i = 2; i < length; i += 2) {
-            if (array[i] !== 0) {
-                tmp = array[0];
-                array[0] = array[i];
-                array[i] = tmp;
-                break;
-            }
-        }    
-    }
-
-    // 두번째만 0일 때,
-    if (array[1] === 0) {
-        for (i = 3; i < length; i += 2) {
-            if (array[i] !== 0) {
-                tmp = array[1];
-                array[1] = array[i];
-                array[i] = tmp;
-                break;
-            }
-        }    
-    }
-    
-    console.log('re sorted array : ' + array);
-
-    first = 0;
-    second = 0;
-    for (i = 0; i < length; i++) {
-        value = array[i] * Math.pow(10, (Math.round((length - i) / 2) - 1));
-        if (i % 2 === 0) {
-            first += value;
-        } else {
-            second += value;
-        }
-    }
-
-    if (first === 0 || second === 0) {
-        console.log('Answer is -1');
-        $('.comment').append('Answer is -1.');    
-        return;
-    }
-
-    console.log("first : " + first);
-    console.log("second : " + second);
-    console.log('Answer is ' + (first + second));
-    $('.comment').append("<p>first : " + first + '</p>');
-    $('.comment').append("<p>second : " + second + '</p>');
-    $('.comment').append('<p>Answer is ' + (first + second) + '</p>');
-  }
-  </script>
-</body>
+  <head>
+    <title>Quiz</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/images/favicon/favicon.ico" type="image/x-icon" />
+    <script type="text/javascript" src="./javascripts/jquery-2.1.0.min.js"></script>
+  </head>
+  <body>
+    <h1>Hello, Yul!</h1>
+    <div>
+      <ul>
+        <li><a href='quiz01.html'>Q1. 임의의 숫자배열을 두개의 자연수로 만들어 더한 값을 최소로.</a></li>
+        <li><a href='antprocession.html'>Q2. 개미수열</a></li>
+      </ul>
+    </div>
+  </body>
 
 </html>
